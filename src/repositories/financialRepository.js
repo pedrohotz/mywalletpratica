@@ -7,7 +7,15 @@ async function createFinancialEventDB(userId,type,value){
       );
 }
 
+async function getFinancialEventsDB(userId){
+    const events = await connection.query(
+        `SELECT * FROM "financialEvents" WHERE "userId"=$1 ORDER BY "id" DESC`,
+        [user.id]
+      );
+    return events.rows;
+}
 
 export {
     createFinancialEventDB,
+    getFinancialEventsDB,
 }
